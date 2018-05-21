@@ -1,0 +1,34 @@
+﻿@model JavaScript.Models.Photo
+
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Create</h2>
+<div ng-controller="addPhoto">
+    <form name="photoForm" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div id="form-group">
+            Title:<input placeholder="Title" type="text" name="title" ng-required="true" ng-init="photo.title=Hej" ng-model="photo.title" />
+            <span class="helper-block" ng-show="photoForm.title.$invalid && !photoForm.title.$pristine">
+                We require a title
+            </span>
+        </div>
+        <div class="form-group">
+            <label id="name-group" class="btn btn-default btn-file">
+                Browse <input type="file" accept="image/*" id="photoUrlSelector" name="photoUrlSelector" style="display: none;" ngf-select ng-model="photo.url" ng-click="photoForm.photo.url.$touched=true" />
+            </label>
+            <input type="text" id="photoUrl" name="photoUrl" data-ng-model="photo.url.name" ng-required="true" ng-disabled="true" />
+        </div>
+        <input value="@ViewBag.userID" type="hidden" ng-required="true" ng-init="photo.userId=@ViewBag.userID" ng-model="photo.userId" />
+        <button id="name-group" type="submit" ng-disabled="!photoForm.$valid" ng-click="newPhoto()">New Photo</button>
+    </form>
+    <p>Form valid: <b>{{photoForm.$valid}}</b></p>
+    <p>File input touched: <b>{{photoForm.photo.url.$touched}}</b></p>
+    <p>Url for the photo: <b>{{photo.url.name}}</b></p>
+    {{successMessage}}
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

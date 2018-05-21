@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="aspnet-JavaScript-20170816043912" Class="JavaScriptDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-JavaScript-20170816043912.mdf;Initial Catalog=aspnet-JavaScript-20170816043912;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Photos" Member="Photos">
+    <Type Name="Photos" Modifier="Sealed">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ApplicationUser_Id" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

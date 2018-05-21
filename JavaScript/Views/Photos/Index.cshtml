@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "JavaScript";
+}
+
+<h2>JavaScript</h2>
+
+<div ng-controller="photoList" class="container">
+    <div class="row">
+        <input type="text" class="form-control" ng-model="search.Title" />
+    </div>
+
+    <div class="row">
+        <div ng-repeat="image in images | filter:search" class="col-sm-6">
+            <h1>{{image.Title}}</h1>
+            <img ng-src="/Content/Sample_Images/{{image.Url}}" width="30%" />
+        </div>
+    </div>
+
+    <div class="row">
+        <form></form>
+    </div>
+
+</div>

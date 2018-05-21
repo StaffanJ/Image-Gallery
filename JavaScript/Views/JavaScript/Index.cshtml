@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Image Gallery";
+}
+
+<h2 style="text-align:center">Image gallery</h2>
+
+<div ng-controller="photoList" class="container">
+    
+    <div class="row">
+    <div class="col-lg-4">
+
+    </div>
+    <div class="input-group col-lg-4">
+        <div class="input-group-addon">
+            <div class="input-group-text">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
+            </div>
+        </div>
+        <input type="text" class="form-control" ng-model="search.Title" placeholder="Search...">
+    </div>
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-3">
+                <br />
+                <a class="btn btn-info" href="~/Javascript/Create">Insert a new image</a>
+            </div> 
+            <div class="col-lg-4">
+
+            </div>
+        }
+    }
+    <div class="col-lg-4">
+    </div><br /> 
+    </div>
+    <div class="row">
+    <div dir-paginate="image in images | filter:search | itemsPerPage: pageSize" current-page="currentPage"  class="col-md-4">
+        <h1 style="text-align:center">{{image.Title}}</h1>
+        <img ng-src="/Content/Sample_Images/{{image.Url}}"class="center-block image-small" ng-click="showOverlay(image)"/>   
+
+        <div id="overlay">
+            <button class="btn btn-info" id="closeButton" style="float:right;" ng-click="removeOverlay()">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <div id="singelImage" ng-click="removeOverlay()">
+                <h1 id="title">{{title}}</h1>
+                <img ng-src="/Content/Sample_Images/{{url}}" width="25%" id="image" class="center-block" />
+            </div>
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
+                <div ng-if="userId == @ViewBag.userID">
+                    <form method="POST" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div class="editButtons">
+                            <div id="editForm">
+                                    <input type="text" />
+                            </div>
+                            <button class="btn btn-info" style="float:right;" ng-click="editImage(title)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button class="btn btn-info" style="float:right;" ng-click="deleteImage(imageId)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            }
+        }
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-5">
+
+    </div>
+    <div class="col-lg-4">
+        <dir-pagination-controls boundary-links="true">
+                
+        </dir-pagination-controls>
+    </div>
+    <div class="col-lg-3">
+
+    </div>
+        
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model JavaScript.Models.Photo
+
+@{
+    ViewBag.Title = "Create";
+}
+<h2>Create</h2>
+<div ng-controller="addPhoto" >
+    <form name="photoForm" method="POST" enctype="multipart/form-data">
+
+        <div id="form-group">
+            Title:<input placeholder="Title" type="text" name="title" ng-required="true" ng-model="photo.title" /><br />
+            <label class="helper-block" ng-show="photoForm.title.$invalid && !photoForm.title.$pristine">
+                We require a title!
+            </label><br />
+        </div>
+        <div class="form-group">
+            <label id="name-group" class="btn btn-default btn-file">
+                Browse <input type="file" accept="image/*" id="imageUpload" name="imageUpload" style="display: none;" ng-required="true" ngf-select ng-model="imageUpload" ng-click="photoForm.imageUpload.$touched=true" />
+            </label>
+            <input type="text" id="photoUrl" name="photoUrl" data-ng-model="imageUpload.name" ng-required="true" ng-disabled="true" /><br />
+            <label class="helper-block" ng-show="photoForm.imageUpload.$invalid && !photoForm.imageUpload.$pristine">
+                We require an image!
+            </label>
+
+            <input type="hidden" ng-required="true" ng-init="photo.userId=@ViewBag.userID" ng-model="photo.userId" />
+            <input id="name-group" class="btn btn-lg btn-primary" type="submit" ng-disabled="!photoForm.$valid" ng-click="newPhoto(imageUpload)">New Photo
+        </div>
+    </form>
+    <p>Form valid: <b>{{photoForm.$valid}}</b></p>
+    <p>File input touched: <b>{{photoForm.imageUpload.$touched}}</b></p>
+    <p>Url for the photo: <b>{{imageUpload.name}}</b></p>
+    {{successMessage}}
+
+</div>
+
+<div>
+    <a class="btn btn-info" href="~/Javascript/Index">Back to images</a>
+</div>
